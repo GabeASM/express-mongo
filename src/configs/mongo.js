@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import mongoURI from './eviroments.js';
 
 function connect(){
-    return mongoose.connect('mongodb://localhost:27017/usuarios')
+    return mongoose.connect(mongoURI)
 }
 
 export default connect;

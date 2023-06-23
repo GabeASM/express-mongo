@@ -1,11 +1,12 @@
 import express from "express";
-import hasdfs from './routes/routes.js'
-import connect from "./bbdd/mongo.js";
+import rutas from './routes/routes.js'
+import connect from "./configs/mongo.js";
 
 const app = express();
 
 app.use(express.json())
-app.use('/', hasdfs)
+app.use('/', rutas)
+
 
 
 console.log('Connecting to database...');

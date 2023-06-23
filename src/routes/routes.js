@@ -25,8 +25,6 @@ router.post("/auth/login" ,login )
 
 router.post("/messages" , crearMensaje)
 
-
-
 router.delete("/messages/:messageId" , eliminarMensajePorId)
 
 
