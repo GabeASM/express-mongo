@@ -3,9 +3,7 @@ import UsuarioModel from "../models/usuario.js"
 import bcrypt from "bcrypt";
 
 
-function holandaQueTalca(req, res) {
-    res.send("holanda que talca como andamios")
-}
+
 
 async function crearUsuario(req, res) {
     try {
@@ -21,9 +19,15 @@ async function crearUsuario(req, res) {
     } catch (err) {
         if (err.name === 'ValidationError') {
             // Error de validación: faltan datos requeridos
-            res.status(400).send('Faltan datos requeridos.');
+            res.status(400).send({
+                status: false,
+                mensaje: 'Faltan datos requeridos.'
+            });
         }
-        res.status(500).send('Error interno del servidor.')
+        res.status(500).send({
+            status: false,
+            mensaje: 'Error en el servidor'
+        })
     }
 }
 
@@ -44,13 +48,26 @@ async function login(req, res) {
         if (usuario) {
             const contraseñaValida = await bcrypt.compare(password, usuario.password)
             if (contraseñaValida) res.status(200).send(true)
-            else res.status(401).send("contraseña incorrecta")
+            else res.status(401).send({
+                status: false,
+                mensaje: 'Contraseña incorrecta.'
+            })
         }
-        else res.status(404).send("usuario no encontrado")
+        else res.status(404).send({
+            status: false,
+            mensaje: 'Usuario no encontrado'
+        })
     }
     catch (err) {
-        if (err.name === 'ValidationError') res.status(400).send('Faltan datos requeridos.');
-        res.status(500).send('Error interno del servidor.')
+        if (err.name === 'ValidationError') {
+            res.status(400).send('Faltan datos requeridos.');
+            return ; 
+        }
+        res.status(500).send({
+            status: false,
+            mensaje: 'Error en el servidor.'
+        })
+        
     }
 }
 
@@ -61,6 +78,7 @@ async function estudiante(req, res) {
         res.status(200).send("Estudiante que desarrollo la API : Gabriel Aillapan San Martin")
     } catch (err) {
         res.status(500).send(err)
+        
     }
 }
 
@@ -68,17 +86,22 @@ async function estudiante(req, res) {
 
 async function crearMensaje(req, res) {
     const { userId, message } = req.body
-
-    const usuario = await UsuarioModel.findById(userId)
-    if (!usuario) res.status(404).send("usuario no encontrado")
     try {
+        const usuario = await UsuarioModel.findById(userId)
+        if (!usuario) {
+            res.status(404).send("usuario no encontrado")
+            return;
+        }
         const mensaje = await MensajeModel.create({
             userId,
             message
         })
         res.status(200).send(true)
     } catch (err) {
-        res.status(500).send(err)
+        res.status(500).send({
+            status: false,
+            mensaje: 'Error en el servidor.'
+        })
     }
 }
 
@@ -117,7 +140,6 @@ async function eliminarMensajePorId(req, res) {
 }
 
 export {
-    holandaQueTalca,
     crearUsuario,
     obtenerUsuarios,
     login,

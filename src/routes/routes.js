@@ -1,6 +1,5 @@
 import {Router} from 'express'; 
 import {
-    holandaQueTalca,
     crearUsuario,
     estudiante,
     obtenerUsuarios,
@@ -12,7 +11,6 @@ import {
 
 const router = Router();
 
-router.get("/usuarios" , holandaQueTalca)
 
 router.get("/users" , obtenerUsuarios)
 
