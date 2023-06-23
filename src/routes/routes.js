@@ -4,20 +4,33 @@ import {
     crearUsuario,
     estudiante,
     obtenerUsuarios,
-    login
+    login,
+    crearMensaje,
+    obtenerMensajePorId,
+    eliminarMensajePorId
 } from '../controllers/UsuarioController.js'
 
 const router = Router();
 
 router.get("/usuarios" , holandaQueTalca)
 
+router.get("/users" , obtenerUsuarios)
+
+router.get("" , estudiante)
+
+router.get("/users/:userId/messages", obtenerMensajePorId);
+
+
 router.post("/auth/register" ,crearUsuario )
 
 router.post("/auth/login" ,login )
 
-router.get("/users" , obtenerUsuarios)
+router.post("/messages" , crearMensaje)
 
-router.get("" , estudiante)
+
+
+router.delete("/messages/:messageId" , eliminarMensajePorId)
+
 
 
 export default router;
