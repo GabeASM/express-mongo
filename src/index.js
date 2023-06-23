@@ -5,7 +5,7 @@ import connect from "./bbdd/mongo.js";
 const app = express();
 
 app.use(express.json())
-app.use('/auth', hasdfs)
+app.use('/', hasdfs)
 
 
 console.log('Connecting to database...');
