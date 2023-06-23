@@ -1,4 +1,4 @@
-import {Router} from 'express'; 
+import { Router } from 'express';
 import {
     crearMensaje,
     eliminarMensajePorId
@@ -6,9 +6,8 @@ import {
 
 const router = Router();
 
+router.post("/", crearMensaje)
 
-router.post("/" , crearMensaje)
-
-router.delete("/:messageId" , eliminarMensajePorId)
+router.delete("/:messageId", eliminarMensajePorId)
 
 export default router;

@@ -1,4 +1,4 @@
-import {Router} from 'express'; 
+import { Router } from 'express';
 import {
     obtenerUsuarios,
     obtenerMensajePorId,
@@ -6,7 +6,7 @@ import {
 
 const router = Router();
 
-router.get("/" , obtenerUsuarios)
+router.get("/", obtenerUsuarios)
 
 router.get("/:userId/messages", obtenerMensajePorId);
 

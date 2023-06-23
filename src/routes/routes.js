@@ -1,4 +1,4 @@
-import {Router} from 'express'; 
+import { Router } from 'express';
 import {
     crearUsuario,
     estudiante,
@@ -8,10 +8,10 @@ import {
 const router = Router();
 
 
-router.get("" , estudiante)
+router.get("", estudiante)
 
-router.post("/auth/register" ,crearUsuario )
+router.post("/auth/register", crearUsuario)
 
-router.post("/auth/login" ,login )
+router.post("/auth/login", login)
 
 export default router;

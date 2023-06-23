@@ -2,9 +2,6 @@ import MensajeModel from "../models/mensaje.js";
 import UsuarioModel from "../models/usuario.js"
 import bcrypt from "bcrypt";
 
-
-
-
 async function crearUsuario(req, res) {
     try {
         const contraseñaEncriptada = await bcrypt.hash(req.body.password, 10);
@@ -18,7 +15,6 @@ async function crearUsuario(req, res) {
         res.status(201).send(true)
     } catch (err) {
         if (err.name === 'ValidationError') {
-            // Error de validación: faltan datos requeridos
             res.status(400).send({
                 status: false,
                 mensaje: 'Faltan datos requeridos.'
